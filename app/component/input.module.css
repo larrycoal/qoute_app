@@ -1,0 +1,30 @@
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 1rem 0;
+}
+.inputContainer input{
+    padding: 10px;
+    background: transparent ;
+    border: 1px solid white;
+    font-size: 1.2rem;
+}
+.inputContainer label{
+    font-size: 1.5rem;
+}
+.buttonWrapper{
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+}
+.buttonWrapper button{
+background-color: transparent;
+border: 1px solid white;
+padding: 10px 1rem;
+font-size: 1.5rem;
+font-weight: bold;
+width: 100%;
+
+}

@@ -1,0 +1,19 @@
+.headerWrapper{
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgb(66, 63, 63);
+}
+.headerWrapper h1{
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.headerWrapper h1 svg{
+    font-size: 1.8rem;
+    margin: 0 3px;
+}
+.headerWrapper div svg{
+    font-size: 2rem;
+}

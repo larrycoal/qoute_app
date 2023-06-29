@@ -1,0 +1,25 @@
+.registerWrapper{
+    margin: 5rem 10px;
+}
+.registerWrapper h1{
+    text-align: center;
+    font-size: 2.2rem;
+    margin: 1rem;
+}
+.registerWrapper p{
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+.registerWrapper h3{
+    text-align: center;
+    font-size: 1.5rem;
+}
+.registerWrapper form{
+    padding: 2rem;
+    backdrop-filter: blur(14px);
+    background-color: rgba(12,30,45,0.7);
+}
+.registerWrapper p {
+  padding: 10px;
+}
