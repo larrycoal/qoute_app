@@ -1,14 +1,24 @@
-"use client"
-import React, { useContext } from "react";
+"use client";
+import React, { useContext, useEffect } from "react";
 import style from "./sidebar.module.css";
+import Image from "next/image"
 import { AiOutlineCloseCircle, AiOutlineHome } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import { BsFillPersonFill, BsPersonBoundingBox } from "react-icons/bs";
 import { CiSettings } from "react-icons/ci";
 import { AppContext } from "../context/AppContext";
+import { AuthContext } from "../context/AuthContext";
+import { useRouter } from "next/navigation";
 const SideBar = () => {
   const { showSideBar, SideBarToggle } = useContext(AppContext);
-
+  const { handleSignOut,currentUser } = useContext(AuthContext);
+  const router = useRouter();
+  const handleLogUserOut = () => {
+    handleSignOut();
+    SideBarToggle();
+    router.push("/login");
+  };
+  useEffect(()=>{ console.log(currentUser);},[])
   return (
     <>
       <aside
@@ -22,10 +32,14 @@ const SideBar = () => {
           <AiOutlineCloseCircle onClick={SideBarToggle} />
         </section>
         <section>
-          <BsPersonBoundingBox />
+          <Image
+            src={currentUser ? currentUser.photoURL:""}
+            height="100"
+            width="100"
+          />
           <div>
-            <p>First Name</p>
-            <p>Username</p>
+            <p>{currentUser && currentUser.displayName?.split(" ")[0]}</p>
+            <p>{currentUser && currentUser.email}</p>
             <p>Total quote</p>
           </div>
         </section>
@@ -42,7 +56,7 @@ const SideBar = () => {
             <CiSettings />
             Settings
           </div>
-          <div>
+          <div onClick={handleLogUserOut}>
             <BiLogOut />
             Logout
           </div>
