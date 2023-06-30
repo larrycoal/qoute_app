@@ -1,38 +1,67 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { Button, TextInput, PasswordInput } from "../component/inputs";
 import style from "./register.module.css";
 const Register = () => {
+  const [user, setUser] = useState({});
+  const [error, setError] = useState([]);
+
+  const handleInputChange = ({ name, value }) => {
+    setUser(() => ({
+      ...user,
+      [name]: value,
+    }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (user.password === user.confirmpassword) {
+      setError([true, "password do not match"]);
+      return;
+    }
+    console.log(user);
+  };
   return (
     <div className={style.registerWrapper}>
       <h1>Register</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextInput
           type="text"
-          placeholder="Enter your fullname"
-          label="Full Name"
-          onchange={(e) => console.log(e.target.value)}
+          placeholder="Enter your firstname"
+          label="First Name"
+          name="firstname"
+          onchange={handleInputChange}
+        />
+        <TextInput
+          type="text"
+          placeholder="Enter your lastname"
+          label="Last Name"
+          name="lastname"
+          onchange={handleInputChange}
         />
         <TextInput
           type="email"
           placeholder="Enter your email"
           label="Email"
-          onchange={(e) => console.log(e.target.value)}
+          name="email"
+          onchange={handleInputChange}
         />
         <TextInput
           type="password"
           placeholder="Enter your password"
           label="Password"
-          onchange={(e) => console.log(e.target.value)}
+          name="password"
+          onchange={handleInputChange}
         />
         <TextInput
           type="password"
           placeholder="Enter your password"
           label="Retype Password"
-          onchange={(e) => console.log(e.target.value)}
+          name="confirmpassword"
+          onchange={handleInputChange}
         />
         <Button text="Register" onclick={(e) => console.log(e.target.value)} />
+        <p className={style.error}>{error[0] && error[1]}</p>
         <p>
           Already have an account? <Link href="/login">Sign in</Link>
         </p>
