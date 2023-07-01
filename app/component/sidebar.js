@@ -9,6 +9,7 @@ import { CiSettings } from "react-icons/ci";
 import { AppContext } from "../context/AppContext";
 import { AuthContext } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
+import { auth } from "../firebase";
 const SideBar = () => {
   const { showSideBar, SideBarToggle } = useContext(AppContext);
   const { handleSignOut,currentUser } = useContext(AuthContext);
@@ -18,7 +19,7 @@ const SideBar = () => {
     SideBarToggle();
     router.push("/login");
   };
-  useEffect(()=>{ console.log(currentUser);},[])
+
   return (
     <>
       <aside
@@ -33,13 +34,15 @@ const SideBar = () => {
         </section>
         <section>
           <Image
-            src={currentUser ? currentUser.photoURL:""}
+            src={auth.currentUser ? auth.currentUser.photoURL : ""}
             height="100"
             width="100"
           />
           <div>
-            <p>{currentUser && currentUser.displayName?.split(" ")[0]}</p>
-            <p>{currentUser && currentUser.email}</p>
+            <p>
+              {auth.currentUser && auth.currentUser.displayName?.split(" ")[0]}
+            </p>
+            <p>{auth.currentUser && auth.currentUser.email}</p>
             <p>Total quote</p>
           </div>
         </section>

@@ -30,7 +30,7 @@ const AuthProvider = ({ children }) => {
         })
           .then(() => {
             setError(null);
-            window.localStorage.setItem("user",JSON.stringify(currentUser))
+            window.localStorage.setItem("user",JSON.stringify(auth.currentUser))
             return currentUser;
           })
           .catch((err) => {

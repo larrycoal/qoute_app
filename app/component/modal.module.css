@@ -3,8 +3,10 @@
     max-height: fit-content;
     margin: 1rem;
     padding: 5px 10px;
-    background-color: rgba(12,30,45,0.7);
+    background-color: rgba(12,30,45,0.9);
     box-shadow: 0px 3px 14px 7px #222121;
+    position: absolute;
+    top: 0;
 }
 .modalWrapper h2{
     margin: 10px 0;
