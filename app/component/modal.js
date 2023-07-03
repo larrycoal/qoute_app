@@ -20,8 +20,6 @@ const QuoteModal = () => {
       const newQuote = {
         ...quote,
         authorId: auth.currentUser.uid,
-        authorPic: auth.currentUser?.photoURL,
-        author: auth.currentUser?.displayName?.split(" ")[0],
         likes: 0,
         createdOn: Date.now(),
       };

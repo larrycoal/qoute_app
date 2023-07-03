@@ -5,9 +5,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
-  signOut
+  signOut,
 } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 const AuthContext = createContext();
 
@@ -15,26 +16,34 @@ const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [error, setError] = useState(null);
 
-  useEffect(()=>{
-    const user = window.localStorage.getItem("user")
-    user && setCurrentUser(JSON.parse(user))
-  },[])
+  useEffect(() => {
+    const user = window.localStorage.getItem("user");
+    user && setCurrentUser(JSON.parse(user));
+  }, []);
 
   const handleCreateUser = (email, password, profileDetails) => {
+    // create new user account
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         setCurrentUser(auth.currentUser);
-        updateProfile(auth.currentUser, {
-          displayName: profileDetails.firstname + " " + profileDetails.lastname,
-          photoURL: profileDetails.profilePicURL,
-        })
+        window.localStorage.setItem("user", JSON.stringify(auth.currentUser));
+        // create a user document in firestore
+        const userRef = doc(db, "user", auth.currentUser.uid);
+        setDoc(
+          userRef,
+          {
+            firstName: profileDetails.firstname,
+            lastName: profileDetails.lastname,
+            profilePic: profileDetails.profilePicURL,
+            joined: Date.now(),
+          },
+          { merge: true }
+        )
           .then(() => {
             setError(null);
-            window.localStorage.setItem("user",JSON.stringify(auth.currentUser))
-            return currentUser;
           })
           .catch((err) => {
-            console.log("something went wrong", err);
+            console.log("error setting user data");
             setError(err);
           });
       })
@@ -55,12 +64,12 @@ const AuthProvider = ({ children }) => {
         setError(err);
       });
   };
-  const handleSignOut = ()=>{
-    window.localStorage.clear("user")
-    setCurrentUser(null)
-    signOut(auth)
-    return
-  }
+  const handleSignOut = () => {
+    window.localStorage.clear("user");
+    setCurrentUser(null);
+    signOut(auth);
+    return;
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -68,8 +77,8 @@ const AuthProvider = ({ children }) => {
         handleCreateUser,
         errorCreatingUser: error,
         handleUserSignIn,
-        errorSigningUser:error,
-       handleSignOut
+        errorSigningUser: error,
+        handleSignOut,
       }}
     >
       {children}

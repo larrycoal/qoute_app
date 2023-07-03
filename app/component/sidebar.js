@@ -1,7 +1,7 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import style from "./sidebar.module.css";
-import Image from "next/image"
+import Image from "next/image";
 import { AiOutlineCloseCircle, AiOutlineHome } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import { BsFillPersonFill, BsPersonBoundingBox } from "react-icons/bs";
@@ -10,16 +10,29 @@ import { AppContext } from "../context/AppContext";
 import { AuthContext } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import { auth } from "../firebase";
+import Link from "next/link";
 const SideBar = () => {
-  const { showSideBar, SideBarToggle } = useContext(AppContext);
-  const { handleSignOut,currentUser } = useContext(AuthContext);
+  const { showSideBar, SideBarToggle, getUser } = useContext(AppContext);
+  const { handleSignOut } = useContext(AuthContext);
+  const [userDetails, setUserDetails] = useState(null);
   const router = useRouter();
   const handleLogUserOut = () => {
     handleSignOut();
     SideBarToggle();
     router.push("/login");
   };
+  const fetchUser = useCallback(async () => {
+    console.log("called",auth.currentUser)
+    if (auth.currentUser) {
+      const temp = await getUser(auth.currentUser?.uid);
+      setUserDetails(temp);
+      console.log("current user form side bar", temp);
+    }
+  }, []);
 
+ useEffect(() => {
+   fetchUser();
+ }, []);
   return (
     <>
       <aside
@@ -34,31 +47,34 @@ const SideBar = () => {
         </section>
         <section>
           <Image
-            src={auth.currentUser ? auth.currentUser.photoURL : ""}
+            src={userDetails?.profilePic}
+            alt="user profile pic"
             height="100"
             width="100"
           />
           <div>
-            <p>
-              {auth.currentUser && auth.currentUser.displayName?.split(" ")[0]}
-            </p>
-            <p>{auth.currentUser && auth.currentUser.email}</p>
+            <p>{userDetails?.firstName}</p>
             <p>Total quote</p>
           </div>
         </section>
         <section>
           <div>
             <AiOutlineHome />
-            Home
+            <Link href="/" onClick={SideBarToggle}>
+              Home
+            </Link>
           </div>
           <div>
             <BsFillPersonFill />
-            Profile
+            <Link href="/profile" onClick={SideBarToggle}>
+              {" "}
+              Profile
+            </Link>
           </div>
-          <div>
+          {/* <div>
             <CiSettings />
             Settings
-          </div>
+          </div> */}
           <div onClick={handleLogUserOut}>
             <BiLogOut />
             Logout
