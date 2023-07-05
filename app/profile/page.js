@@ -6,6 +6,7 @@ import Image from "next/image";
 import { auth } from "../firebase";
 import { AppContext } from "../context/AppContext";
 import Quote from "../component/quote";
+import { Button } from "../component/inputs";
 
 const ProfilePage = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -28,7 +29,7 @@ const ProfilePage = () => {
       const tempQuotes = allQuotes.filter(
         (quote) => quote.authorId === currentUser.uid
       );
-      setUserQuotes([ ...tempQuotes ]);
+      setUserQuotes([...tempQuotes]);
     }
   }, [allQuotes]);
   return (
@@ -41,9 +42,17 @@ const ProfilePage = () => {
             height="150"
             width="150"
           />
-          <p>{userDetails?.firstName}</p>
-          <p>No Bio</p>
-          <p>joined on : date</p>
+          <div className={style.userProfile}>
+            <div>
+              <p>{userDetails?.firstName}</p>
+              <p>No Bio</p>
+              <p>joined on : date</p>
+            </div>
+            <Button
+              text="Edit Profile"
+              styleopt={{ alignItems: "flex-end", fontSize: "1rem" }}
+            />
+          </div>
         </div>
         <div className={style.bottom}>
           <h3>Your Quotes</h3>

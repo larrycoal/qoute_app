@@ -9,6 +9,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    position: relative;
 }
 .quoteWrapper .top span:nth-child(2){
     flex: 1;
@@ -31,4 +32,16 @@
     display: flex;
     align-items: center;
     gap: 10px;
+}
+.optWrapper{
+position: absolute;
+right: 10px;
+top: 15px;
+list-style: none;
+background-color: rgb(83, 78, 78);
+margin: 0 5px;
+}
+.optWrapper li{
+    padding: 5px 10px;
+    font-size: 1.1rem;
 }

@@ -14,9 +14,12 @@ const TextInput = ({ label, type, placeholder, onchange,name }) => {
   );
 };
 
-const Button = ({ text, onclick,variant,icon }) => {
+const Button = ({ text, onclick,variant,icon,styleopt }) => {
   return (
-    <div className={style.buttonWrapper + " " + style[variant]}>
+    <div
+      className={style.buttonWrapper + " " + style[variant]}
+      style={styleopt}
+    >
       <button onClick={onclick}>
         {text && text}
         {icon && icon}

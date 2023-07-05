@@ -8,13 +8,15 @@ const AppContext = createContext();
 const AppProvider = ({ children }) => {
   const [showSideBar, setShowSideBar] = useState(false);
   const [showQuoteModal, setShowQuoteModal] = useState(false);
+  const [modalMode,setModalMode] = useState(["Create",null])
   const [allQuotes, setAllQuotes] = useState([]);
 
   const SideBarToggle = () => {
     setShowSideBar(!showSideBar);
   };
-  const handleShowModal = () => {
+  const handleShowModal = (type,quote = null) => {
     setShowQuoteModal(!showQuoteModal);
+    setModalMode([type,quote])
   };
 
   const getUser = async (userId) => {
@@ -64,6 +66,7 @@ const AppProvider = ({ children }) => {
         createQuote,
         allQuotes,
         getUser,
+        modalMode,
       }}
     >
       {children}
