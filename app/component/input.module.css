@@ -24,7 +24,7 @@
   background-color: transparent;
   border: 1px solid white;
   padding: 10px 1rem;
-font-size: inherit;
+  font-size: inherit;
   font-weight: bold;
   width: 100%;
 }
@@ -47,10 +47,32 @@ font-size: inherit;
   font-weight: bold;
   font-size: 3rem;
 }
+.textBoxContainer {
+  display: flex;
+  flex-direction: column;
+}
+.textBoxContainer textarea {
+  background-color: transparent;
+  max-width: 100vw;
+  border: 1px solid white;
+  outline: none;
+  padding: 5px;
+  margin: 5px 0px;
+}
+.textBoxContainer label{
+    font-size: 1.5rem;
+}
 .primary {
   background-color: #03c988;
 }
 .primary button {
   color: black !important;
   border: none;
+}
+.fileUploader{
+    margin: 10px 0;
+}
+.fileUploader svg{
+    margin: 0 5px;
+    font-size: 1.2rem;
 }

@@ -12,12 +12,18 @@ import style from "./quote.module.css";
 import { AppContext } from "../context/AppContext";
 const Quote = ({ quote }) => {
   const [showOptions, setShowOptions] = useState(false);
-  const { handleShowModal } = useContext(AppContext);
+  const { handleShowModal, deleteQuote, fetchAllQoutes } =
+    useContext(AppContext);
   const currentUser = JSON.parse(window.localStorage.getItem("user"));
 
   const handleEditQuote = () => {
     setShowOptions(!showOptions);
-    handleShowModal("Edit",quote)
+    handleShowModal("Edit", quote);
+  };
+  const handleDeleteQuote = () => {
+    setShowOptions(!showOptions);
+    deleteQuote(quote.quoteId);
+    fetchAllQoutes()
   };
   return (
     <div className={style.quoteWrapper}>
@@ -26,7 +32,7 @@ const Quote = ({ quote }) => {
           <Image src={quote.profilePic} height="50" width="50" />
         </span>
         <span>{quote.firstName}</span>
-        {quote.authorId === currentUser.uid && (
+        {quote?.authorId === currentUser?.uid && (
           <SlOptionsVertical onClick={() => setShowOptions(!showOptions)} />
         )}
         <ul
@@ -37,7 +43,7 @@ const Quote = ({ quote }) => {
             <AiOutlineEdit />
             Edit
           </li>
-          <li onClick={() => setShowOptions(!showOptions)}>
+          <li onClick={handleDeleteQuote}>
             <AiOutlineDelete />
             Delete
           </li>

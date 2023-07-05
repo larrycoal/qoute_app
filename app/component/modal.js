@@ -14,6 +14,7 @@ const QuoteModal = () => {
     createQuote,
     fetchAllQoutes,
     modalMode,
+    updateQuote,
   } = useContext(AppContext);
   // const { currentUser } = useContext(AuthContext);
   const handleQuoteChange = (e) => {
@@ -33,6 +34,11 @@ const QuoteModal = () => {
       handleShowModal();
     }
   };
+  const handleEditQuote = () => {
+    updateQuote(modalMode[1]?.quoteId, quote);
+    fetchAllQoutes();
+    handleShowModal();
+  };
   useEffect(() => {
     setQuote("");
     if (modalMode && modalMode[0] === "Edit") {
@@ -47,7 +53,6 @@ const QuoteModal = () => {
       <h2>Write a quote</h2>
       <textarea
         rows="20"
-        cols="44"
         name="quote"
         onChange={handleQuoteChange}
         value={quote}
@@ -59,7 +64,9 @@ const QuoteModal = () => {
         <Button
           text={modalMode[0] === "Edit" ? "Edit quote" : "quote"}
           variant="primary"
-          onclick={handleCreateQuote}
+          onclick={
+            modalMode[0] === "Edit" ? handleEditQuote : handleCreateQuote
+          }
         />
       </div>
     </div>

@@ -7,6 +7,8 @@ import { auth } from "../firebase";
 import { AppContext } from "../context/AppContext";
 import Quote from "../component/quote";
 import { Button } from "../component/inputs";
+import QuoteModal from "../component/modal";
+import Link from "next/link";
 
 const ProfilePage = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -45,13 +47,15 @@ const ProfilePage = () => {
           <div className={style.userProfile}>
             <div>
               <p>{userDetails?.firstName}</p>
-              <p>No Bio</p>
+              <p>{userDetails?.bio !== ""? userDetails?.bio:"No bio"}</p>
               <p>joined on : date</p>
             </div>
-            <Button
-              text="Edit Profile"
-              styleopt={{ alignItems: "flex-end", fontSize: "1rem" }}
-            />
+            <Link href="/profile/edit">
+              <Button
+                text="Edit Profile"
+                styleopt={{ alignItems: "flex-end", fontSize: "1rem" }}
+              />
+            </Link>
           </div>
         </div>
         <div className={style.bottom}>
@@ -62,6 +66,7 @@ const ProfilePage = () => {
             <p>You do not have any quotes yet</p>
           )}
         </div>
+        <QuoteModal />
       </div>
     </Applayout>
   );
