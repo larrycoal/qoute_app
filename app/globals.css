@@ -16,4 +16,5 @@ main{
   height: 100%;
   position: relative;
   overflow: scroll;
+  padding-bottom: 8rem;
 }

@@ -7,6 +7,7 @@ import { AppContext } from "../../context/AppContext";
 import {
   Button,
   FileUploader,
+  ProfilePhoto,
   TextBox,
   TextInput,
 } from "@/app/component/inputs";
@@ -54,7 +55,7 @@ const EditProfile = () => {
     <div className={style.editPageWrapper}>
       <h3>Edit Profile</h3>
       <div className={style.imgContainer}>
-        <Image src={userDetails?.profilePic} height="150" width="150" />
+        <ProfilePhoto src={userDetails?.profilePic} alt={userDetails?.firstName} height="150" width="150" />
         <FileUploader
           onchange={handleFileLoaded}
           text="Upload Pic"

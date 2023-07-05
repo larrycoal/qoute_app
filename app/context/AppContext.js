@@ -42,7 +42,7 @@ const AppProvider = ({ children }) => {
   };
   const fetchAllQoutes = async () => {
     const querySnapshot = await getDocs(collection(db, "quotes"));
-    const tempQuotes = [];
+    let tempQuotes = [];
     querySnapshot.forEach(async (doc) => {
       // doc.data() is never undefined for query doc snapshots
       const tempDoc = doc.data();
@@ -50,7 +50,11 @@ const AppProvider = ({ children }) => {
       tempQuotes.push({
         quoteId: doc.id,
         ...tempDoc,
+        likes: tempDoc.likes.length,
         ...author,
+      });
+      tempQuotes = tempQuotes.sort((a, b) => {
+        return new Date(b.createdOn) - new Date(a.createdOn);
       });
       setAllQuotes(tempQuotes);
     });
@@ -87,7 +91,7 @@ const AppProvider = ({ children }) => {
     profileurl = await getDownloadURL(picRef);
     return profileurl;
   };
-  const updateUserProfile = async (userId,userDetail) => {
+  const updateUserProfile = async (userId, userDetail) => {
     const userRef = doc(db, "user", userId);
     updateDoc(userRef, userDetail)
       .then(() => {
@@ -96,6 +100,17 @@ const AppProvider = ({ children }) => {
       .catch(() => {
         console.log("Failed to update user");
       });
+  };
+  const likeQuote = async (quoteId, user) => {
+    const quoteRef = doc(db, "quotes", quoteId);
+    const fetchedQuote = await getDoc(quoteRef);
+    let allLikes = fetchedQuote.data().likes;
+    if (allLikes.indexOf(user) === -1) {
+      allLikes.push(user);
+    } else {
+      allLikes.splice(allLikes.indexOf(user), 1);
+    }
+    updateDoc(quoteRef, { likes: allLikes }, { merge: true });
   };
   return (
     <AppContext.Provider
@@ -113,6 +128,7 @@ const AppProvider = ({ children }) => {
         deleteQuote,
         uploadImage,
         updateUserProfile,
+        likeQuote,
       }}
     >
       {children}

@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useRef } from "react";
 import style from "./input.module.css";
 
@@ -72,4 +73,11 @@ const FileUploader = ({ text, icon, onchange }) => {
     </div>
   );
 };
-export { Button, TextInput, TextBox, FileUploader };
+const ProfilePhoto=({src,alt="profile picture",height,width})=>{
+    return(
+        <div className={style.profilePhotoWrapper}>
+            <Image src={src} alt={alt} height={height} width={width}/>
+        </div>
+    )
+}
+export { Button, TextInput, TextBox, FileUploader, ProfilePhoto };

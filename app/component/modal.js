@@ -25,7 +25,7 @@ const QuoteModal = () => {
       const newQuote = {
         quote: quote,
         authorId: auth.currentUser.uid,
-        likes: 0,
+        likes: [],
         createdOn: Date.now(),
       };
       createQuote(newQuote);

@@ -17,8 +17,23 @@
     display: flex;
     justify-content: space-between;
     margin: 1rem 0;
+    gap: 10px;
 }
-.profileWrapper a{
+.userProfile div{
+    flex: 2;
+}
+.userProfile a{
     align-self: flex-end;
     text-decoration: none;
+    flex: 1;
+}
+.userProfile div .name{
+    font-weight: bold;
+}
+.userProfile div .bio{
+    font-size: .9rem;
+    margin: 5px 0;
+}
+.userProfile div .date{
+    display: flex;
 }

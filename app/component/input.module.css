@@ -76,3 +76,11 @@
     margin: 0 5px;
     font-size: 1.2rem;
 }
+.profilePhotoWrapper{
+    border-radius: 100%;
+}
+.profilePhotoWrapper img{
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center right;
+}

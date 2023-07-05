@@ -5,12 +5,12 @@ import Image from "next/image";
 import { AiOutlineCloseCircle, AiOutlineHome } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import { BsFillPersonFill, BsPersonBoundingBox } from "react-icons/bs";
-import { CiSettings } from "react-icons/ci";
 import { AppContext } from "../context/AppContext";
 import { AuthContext } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import { auth } from "../firebase";
 import Link from "next/link";
+import { ProfilePhoto } from "./inputs";
 const SideBar = () => {
   const { showSideBar, SideBarToggle, getUser } = useContext(AppContext);
   const { handleSignOut } = useContext(AuthContext);
@@ -22,17 +22,15 @@ const SideBar = () => {
     router.push("/login");
   };
   const fetchUser = useCallback(async () => {
-    console.log("called",auth.currentUser)
     if (auth.currentUser) {
       const temp = await getUser(auth.currentUser?.uid);
       setUserDetails(temp);
-      console.log("current user form side bar", temp);
     }
   }, []);
 
- useEffect(() => {
-   fetchUser();
- }, []);
+  useEffect(() => {
+    fetchUser();
+  }, []);
   return (
     <>
       <aside
@@ -46,9 +44,9 @@ const SideBar = () => {
           <AiOutlineCloseCircle onClick={SideBarToggle} />
         </section>
         <section>
-          <Image
+          <ProfilePhoto
             src={userDetails?.profilePic}
-            alt="user profile pic"
+            alt={userDetails?.firstName + "profile pic"}
             height="100"
             width="100"
           />

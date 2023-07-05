@@ -1,47 +1,54 @@
-.quoteWrapper{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 1rem;
-    border-bottom: 1px solid rgb(66, 63, 63);
+.quoteWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 1rem;
+  border-bottom: 1px solid rgb(66, 63, 63);
 }
-.quoteWrapper .top{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    position: relative;
+.quoteWrapper .top {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  position: relative;
+  padding: 10px 0;
 }
-.quoteWrapper .top span:nth-child(2){
-    flex: 1;
-    font-size: 1.5rem;
-    font-weight: bold;
+
+.quoteWrapper .top span:nth-child(2) {
+  flex: 1;
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: fit-content;
+  max-width: fit-content;
 }
-.quoteWrapper .middle{
-    font-size: 1.2rem;
-    letter-spacing: .5px;
-    line-height: 25px;
+.quoteWrapper .top span:nth-child(3) {
+  flex: 1;
 }
-.quoteWrapper .middle span:nth-child(2){
-    padding: 5px;
+.quoteWrapper .middle {
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+  line-height: 25px;
 }
-.quoteWrapper .middle p{
-    text-align: right;
-    margin: 10px 0;
+.quoteWrapper .middle span:nth-child(2) {
+  padding: 5px;
 }
-.quoteWrapper .bottom{
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.quoteWrapper .middle p {
+  text-align: right;
+  margin: 10px 0;
 }
-.optWrapper{
-position: absolute;
-right: 10px;
-top: 15px;
-list-style: none;
-background-color: rgb(83, 78, 78);
-margin: 0 5px;
+.quoteWrapper .bottom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.optWrapper li{
-    padding: 5px 10px;
-    font-size: 1.1rem;
+.optWrapper {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  list-style: none;
+  background-color: rgb(83, 78, 78);
+  margin: 0 5px;
+}
+.optWrapper li {
+  padding: 5px 10px;
+  font-size: 1.1rem;
 }
