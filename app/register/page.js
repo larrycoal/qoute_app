@@ -87,7 +87,7 @@ const Register = () => {
           name="confirmpassword"
           onchange={handleInputChange}
         />
-        <Button text="Register" onclick={(e) => console.log(e.target.value)} />
+        <Button text="Register" />
         <p>
           Already have an account? <Link href="/login">Sign in</Link>
         </p>

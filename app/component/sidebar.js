@@ -4,7 +4,7 @@ import style from "./sidebar.module.css";
 import Image from "next/image";
 import { AiOutlineCloseCircle, AiOutlineHome } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
-import { BsFillPersonFill, BsPersonBoundingBox } from "react-icons/bs";
+import { BsFillPersonFill } from "react-icons/bs";
 import { AppContext } from "../context/AppContext";
 import { AuthContext } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
@@ -71,14 +71,9 @@ const SideBar = () => {
           <div>
             <BsFillPersonFill />
             <Link href="/profile" onClick={SideBarToggle}>
-              {" "}
               Profile
             </Link>
           </div>
-          {/* <div>
-            <CiSettings />
-            Settings
-          </div> */}
           <div onClick={handleLogUserOut}>
             <BiLogOut />
             Logout

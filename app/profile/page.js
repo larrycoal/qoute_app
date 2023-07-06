@@ -53,7 +53,7 @@ const ProfilePage = () => {
           <div className={style.userProfile}>
             <div>
               <p className={style.name}>
-                {userDetails?.firstName} {userDetails?.firstName}
+                {userDetails?.firstName} {userDetails?.lastName}
               </p>
               <p className={style.bio}>
                 {userDetails?.bio !== "" ? userDetails?.bio : "No bio"}
@@ -77,7 +77,7 @@ const ProfilePage = () => {
         </div>
         <div className={style.bottom}>
           <h3>Your Quotes</h3>
-          {userQuotes ? (
+          {userQuotes?.length > 0 ? (
             userQuotes.map((quote) => <Quote quote={quote} />)
           ) : (
             <p>You do not have any quotes yet</p>

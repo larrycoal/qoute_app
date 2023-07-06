@@ -21,7 +21,6 @@ export default function Home() {
     if (!auth?.currentUser) {
       router.push("/login");
     }
-    console.log(auth.currentUser);
   }, [auth?.currentUser]);
 
   const handleFetchQuotes = useCallback(async () => {
