@@ -10,12 +10,13 @@ import {
 import style from "./quote.module.css";
 import { AppContext } from "../context/AppContext";
 import { ProfilePhoto } from "./inputs";
+import { auth } from "../firebase";
 const Quote = ({ quote }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [quoteTime, setQuoteTime] = useState(null);
   const { handleShowModal, deleteQuote, fetchAllQoutes, likeQuote } =
     useContext(AppContext);
-  const currentUser = JSON.parse(window.localStorage.getItem("user"));
+  const currentUser = auth.currentUser;
 
   const handleEditQuote = () => {
     setShowOptions(!showOptions);
