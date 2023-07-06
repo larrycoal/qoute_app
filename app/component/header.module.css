@@ -17,3 +17,23 @@
 .headerWrapper div svg{
     font-size: 2rem;
 }
+.desktopHeader{
+    display: none;
+}
+@media screen and (min-width:700px) {
+    .mobileHamburger{
+        display: none;
+    }
+    .desktopHeader{
+        display: flex;
+        list-style: none;
+        gap: 16px;
+        font-size: 2rem;
+        padding: 0 20px;
+    }
+    .desktopHeader a{
+        text-decoration: none;
+        margin: 0 5px;
+    }
+
+}

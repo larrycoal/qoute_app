@@ -12,9 +12,10 @@ import {
   TextInput,
 } from "@/app/component/inputs";
 import { useRouter } from "next/navigation";
+import { auth } from "@/app/firebase";
 const EditProfile = () => {
   const [userDetails, setUserDetails] = useState(null);
-  const currentUser = JSON.parse(window.localStorage.getItem("user"));
+  const currentUser = auth.currentUser
   const { getUser, uploadImage, updateUserProfile } = useContext(AppContext);
   const router = useRouter()
 
@@ -24,10 +25,13 @@ const EditProfile = () => {
       setUserDetails(temp);
     }
   }, []);
-
-  useEffect(() => {
+ useEffect(() => {
+   if (!currentUser) {
+     router.push("/login");
+   }else{
     fetchUser(currentUser.uid);
-  }, []);
+   }
+ }, [currentUser]);
   useEffect(() => {
     console.log(userDetails);
   }, [userDetails]);

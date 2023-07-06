@@ -5,8 +5,8 @@
 }
 .editPageWrapper h3{
     text-align: center;
-    margin: 10px 0;
-    font-size: 2rem;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
 }
 .formWrapper div:last-child{
     display: flex;
@@ -14,7 +14,7 @@
 
 }
 .formWrapper{
-    padding: 10px 0;
+    padding-bottom: 10px ;
 }
 .imgContainer{
     position: relative;
@@ -27,4 +27,10 @@
 }
 .imgContainer input[type="file"]{
     font-size: 1.2rem;
+}
+@media screen and (min-width: 700px){
+    .editPageWrapper{
+        max-width: 1000px;
+        margin: 0 auto;
+    }
 }

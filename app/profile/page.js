@@ -8,23 +8,29 @@ import Quote from "../component/quote";
 import { Button, ProfilePhoto } from "../component/inputs";
 import QuoteModal from "../component/modal";
 import Link from "next/link";
-import {AiOutlineCalendar} from "react-icons/ai"
+import { AiOutlineCalendar } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 const ProfilePage = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [userQuotes, setUserQuotes] = useState();
   const { getUser, allQuotes, fetchAllQoutes } = useContext(AppContext);
-  const currentUser = JSON.parse(window.localStorage.getItem("user"));
+  const currentUser = auth.currentUser;
+  const router = useRouter();
   const fetchUser = useCallback(async (id) => {
     if (id) {
       const temp = await getUser(id);
       setUserDetails(temp);
     }
   }, []);
-
   useEffect(() => {
-    fetchUser(currentUser.uid);
-    fetchAllQoutes();
-  }, []);
+    if (!currentUser) {
+      router.push("/login");
+    } else {
+      fetchUser(currentUser.uid);
+      fetchAllQoutes();
+    }
+  }, [currentUser]);
+
   useEffect(() => {
     if (allQuotes) {
       const tempQuotes = allQuotes.filter(
@@ -53,7 +59,8 @@ const ProfilePage = () => {
                 {userDetails?.bio !== "" ? userDetails?.bio : "No bio"}
               </p>
               <p className={style.date}>
-                <AiOutlineCalendar/>Joined: {new Date(userDetails?.joined).toLocaleDateString()}
+                <AiOutlineCalendar />
+                Joined: {new Date(userDetails?.joined).toLocaleDateString()}
               </p>
             </div>
             <Link href="/profile/edit">

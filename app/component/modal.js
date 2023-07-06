@@ -60,13 +60,19 @@ const QuoteModal = () => {
         placeholder="Give us a memorable quote"
       ></textarea>
       <div className={style.btnWrapper}>
-        <Button text="cancel" variant="secondary" onclick={handleShowModal} />
+        <Button
+          text="cancel"
+          variant="secondary"
+          onclick={handleShowModal}
+          styleopt={{ fontSize: ".8rem" }}
+        />
         <Button
           text={modalMode[0] === "Edit" ? "Edit quote" : "quote"}
           variant="primary"
           onclick={
             modalMode[0] === "Edit" ? handleEditQuote : handleCreateQuote
           }
+          styleopt={{ fontSize: ".8rem" }}
         />
       </div>
     </div>
