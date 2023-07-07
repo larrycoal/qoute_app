@@ -35,6 +35,7 @@ const AuthProvider = ({ children }) => {
             lastName: profileDetails.lastname,
             profilePic: profileDetails.profilePicURL,
             joined: Date.now(),
+            bio:""
           },
           { merge: true }
         )
