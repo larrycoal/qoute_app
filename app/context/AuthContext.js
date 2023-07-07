@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const user = auth.currentUser;
-    user && setCurrentUser(JSON.parse(user));
+    user && setCurrentUser(user);
   }, []);
 
   const handleCreateUser = (email, password, profileDetails) => {
