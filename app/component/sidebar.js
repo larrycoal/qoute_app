@@ -56,7 +56,7 @@ const SideBar = () => {
             <p>
               Total quote:
               {allQuotes.filter(
-                (quote) => quote.authorId === auth.currentUser.uid
+                (quote) => quote.authorId === auth.currentUser?.uid
               ).length}
             </p>
           </div>
