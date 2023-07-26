@@ -29,31 +29,33 @@ const Quote = ({ quote }) => {
   };
 
   const handleQuoteLike = (quoteId) => {
-    likeQuote(quoteId,currentUser.uid);
+    likeQuote(quoteId, currentUser.uid);
     fetchAllQoutes();
   };
   useEffect(() => {
-    const month =
-      new Date(Date.now()).getMonth() - new Date(quote.createdOn).getMonth();
-    const day =
-      new Date(Date.now()).getDay() - new Date(quote.createdOn).getDay();
-    const hrs =
-      new Date(Date.now()).getHours() - new Date(quote.createdOn).getHours();
-    const minute =
-      new Date(Date.now()).getMinutes() -
-      new Date(quote.createdOn).getMinutes();
-    const secs = new Date(quote.createdOn).getSeconds();
-    if (month > 0) {
+    const timediff =
+      new Date(Date.now()).getTime() - new Date(quote.createdOn).getTime();
+    const month = timediff / (1000 * 60 * 60 * 24 * 30);
+    const day = timediff / (1000 * 60 * 60 * 24);
+    const hrs = timediff / (1000 * 60 * 60);
+    const minute = timediff / (1000 * 60);
+    const secs = timediff / 1000;
+    console.log(month);
+    if (month >= 1) {
       setQuoteTime(month + "month");
       return;
-    } else if (day > 0) {
-      setQuoteTime(day + "d");
-    } else if (hrs > 0) {
-      setQuoteTime(hrs + "h");
-    } else if (minute > 0) {
-      setQuoteTime(minute + "m");
+    } else if (day >= 1) {
+      setQuoteTime(Math.floor(day) + "d");
+      return;
+    } else if (hrs >= 1) {
+      setQuoteTime(Math.floor(hrs) + "h");
+      return;
+    } else if (minute >= 0) {
+      setQuoteTime(Math.floor(minute) + "m");
+      return;
     } else {
-      setQuoteTime(secs + "s");
+      setQuoteTime(Math.floor(secs) + "s");
+      return;
     }
   }, [quote]);
   return (
@@ -96,7 +98,7 @@ const Quote = ({ quote }) => {
       <div className={style.bottom}>
         <AiOutlineCalendar />
         <span>{new Date(quote.createdOn).toLocaleDateString()}</span>
-        <span onClick={()=>handleQuoteLike(quote.quoteId)}>
+        <span onClick={() => handleQuoteLike(quote.quoteId)}>
           <AiOutlineHeart /> {quote?.likes} likes
         </span>
       </div>

@@ -32,9 +32,7 @@ const EditProfile = () => {
     fetchUser(currentUser.uid);
    }
  }, [currentUser]);
-  useEffect(() => {
-    console.log(userDetails);
-  }, [userDetails]);
+
 
   const handleProfileChange = (data) => {
     setUserDetails(() => ({
